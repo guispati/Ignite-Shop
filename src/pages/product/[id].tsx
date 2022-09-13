@@ -2,9 +2,9 @@ import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/future/image';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Stripe from 'stripe';
+import { PurchaseListContext } from '../../contexts/PurchaseListContext';
 import { stripe } from '../../lib/stripe';
 import { ImageContainer, ProductContainer, ProductDetails } from '../../styles/pages/product';
 
@@ -26,6 +26,8 @@ export default function Product({ product }: ProductProps) {
     // if (isFallback) {
     //     return <p>Loading...</p>
     // }
+
+    const { addItemToCart } = useContext(PurchaseListContext);
 
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
 
@@ -63,7 +65,7 @@ export default function Product({ product }: ProductProps) {
 
                     <p>{product.description}</p>
 
-                    <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
+                    <button disabled={isCreatingCheckoutSession} onClick={() => addItemToCart(product, 1)}>
                         Comprar agora
                     </button>
                 </ProductDetails>
