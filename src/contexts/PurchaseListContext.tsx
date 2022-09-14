@@ -67,11 +67,7 @@ export function PurchaseListContextProvider({ children }: ProductsContextProvide
     function clearCart() {
         setCart([]);
     }
-
-    useEffect(() => {
-        console.log(cart);
-    }, [cart]);
-
+    
     return (
         <PurchaseListContext.Provider value={{ cart, addItemToCart, changeQuantityOnCart, clearCart, removeItemFromCart }}>
             {children}
