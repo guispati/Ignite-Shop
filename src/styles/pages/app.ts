@@ -15,4 +15,8 @@ export const Header = styled('header', {
     margin: '0 auto',
     display: 'flex',
     justifyContent: 'space-between',
+
+    a: {
+        cursor: 'pointer',
+    },
 });
